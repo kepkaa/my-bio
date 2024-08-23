@@ -37,6 +37,30 @@ section.active {
     text-align: left;
 }
 
+body {
+    background-color: black; /* Основной цвет фона */
+    color: white; /* Основной цвет текста */
+    transition: background-color 0.5s, color 0.5s; /* Плавный переход */
+}
+
+.light-mode {
+    background-color: white; /* Цвет фона при светлом режиме */
+    color: black; /* Цвет текста при светлом режиме */
+}
+
+.progress-container {
+    background-color: #444; /* Цвет контейнера прогресса в темном режиме */
+}
+
+.progress-bar {
+    background-color: #4caf50; /* Цвет бара прогресса */
+}
+
+.light-mode .progress-container {
+    background-color: #ccc; /* Цвет контейнера прогресса в светлом режиме */
+}
+
+
 .progress-bar {
     background-color: #4CAF50; /* Зеленый цвет для прогресс-бара */
     height: 20px;
