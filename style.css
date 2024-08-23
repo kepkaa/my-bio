@@ -5,6 +5,7 @@ body {
     padding: 0;
     background-color: #2c2c2c; /* Темный серый цвет для фона */
     color: white; /* Белый цвет для текста */
+    transition: background-color 0.5s, color 0.5s; /* Плавный переход */
 }
 
 header {
@@ -37,29 +38,11 @@ section.active {
     text-align: left;
 }
 
-body {
-    background-color: #1a1a1a; /* Темно-серый фон */
-    color: white; /* Цвет текста */
-    transition: background-color 0.5s, color 0.5s; /* Плавный переход */
-}
-
-.light-mode {
-    background-color: #f0f0f0; /* Светло-серый фон для светлого режима */
-    color: black; /* Цвет текста при светлом режиме */
-}
-
 .progress-container {
     background-color: #444; /* Цвет контейнера прогресса в темном режиме */
+    border-radius: 5px;
+    overflow: hidden;
 }
-
-.progress-bar {
-    background-color: #4caf50; /* Цвет бара прогресса */
-}
-
-.light-mode .progress-container {
-    background-color: #ccc; /* Цвет контейнера прогресса в светлом режиме */
-}
-
 
 .progress-bar {
     background-color: #4CAF50; /* Зеленый цвет для прогресс-бара */
@@ -68,10 +51,13 @@ body {
     transition: width 1s;
 }
 
-.progress-container {
-    background-color: #f3f3f3; /* Светлый цвет для контейнера прогресс-бара */
-    border-radius: 5px;
-    overflow: hidden;
+.light-mode {
+    background-color: #f0f0f0; /* Светло-серый фон для светлого режима */
+    color: black; /* Цвет текста при светлом режиме */
+}
+
+.light-mode .progress-container {
+    background-color: #ccc; /* Цвет контейнера прогресса в светлом режиме */
 }
 
 /* Адаптивные стили для мобильных устройств */
