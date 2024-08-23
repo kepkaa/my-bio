@@ -11,22 +11,22 @@ body {
 header {
     background-color: #4CAF50; /* Зеленый цвет для заголовка */
     color: white;
-    padding: 15px;
+    padding: 10px; /* Уменьшение отступа в заголовке */
 }
 
 nav {
-    margin: 20px 0;
+    margin: 15px 0; /* Уменьшение верхнего и нижнего отступа */
 }
 
 nav a {
-    margin: 0 15px;
+    margin: 0 10px; /* Уменьшение отступа между ссылками */
     text-decoration: none;
     color: #4CAF50; /* Цвет ссылок */
 }
 
 section {
     display: none;
-    padding: 20px;
+    padding: 15px; /* Уменьшение отступа в секциях */
 }
 
 section.active {
@@ -34,7 +34,7 @@ section.active {
 }
 
 .progress {
-    margin: 20px 0;
+    margin: 15px 0; /* Уменьшение отступа между прогресс-барами */
     text-align: left;
 }
 
@@ -42,11 +42,12 @@ section.active {
     background-color: #444; /* Цвет контейнера прогресса в темном режиме */
     border-radius: 5px;
     overflow: hidden;
+    height: 15px; /* Уменьшение высоты контейнера прогресса */
 }
 
 .progress-bar {
     background-color: #4CAF50; /* Зеленый цвет для прогресс-бара */
-    height: 20px;
+    height: 100%; /* Высота прогресс-бара по высоте родителя */
     width: 0;
     transition: width 1s;
 }
@@ -60,6 +61,13 @@ section.active {
     background-color: #ccc; /* Цвет контейнера прогресса в светлом режиме */
 }
 
+.theme-toggle {
+    display: inline-block; /* Делаем элемент интерактивным */
+    cursor: pointer; /* Курсор указывает, что элемент можно нажимать */
+    font-size: 24px; /* Размер иконки */
+    padding: 5px; /* Отступ для уменьшения области */
+}
+
 /* Адаптивные стили для мобильных устройств */
 @media (max-width: 600px) {
     nav {
@@ -69,7 +77,7 @@ section.active {
     }
 
     nav a {
-        margin: 10px 0; /* Отступ между ссылками */
+        margin: 8px 0; /* Уменьшение отступа между ссылками */
     }
 
     section {
