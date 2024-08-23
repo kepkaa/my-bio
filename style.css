@@ -38,13 +38,13 @@ section.active {
 }
 
 body {
-    background-color: black; /* Основной цвет фона */
-    color: white; /* Основной цвет текста */
+    background-color: #1a1a1a; /* Темно-серый фон */
+    color: white; /* Цвет текста */
     transition: background-color 0.5s, color 0.5s; /* Плавный переход */
 }
 
 .light-mode {
-    background-color: white; /* Цвет фона при светлом режиме */
+    background-color: #f0f0f0; /* Светло-серый фон для светлого режима */
     color: black; /* Цвет текста при светлом режиме */
 }
 
