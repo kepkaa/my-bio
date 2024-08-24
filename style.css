@@ -22,6 +22,9 @@ nav a {
     margin: 0 10px; /* Уменьшение отступа между ссылками */
     text-decoration: none;
     color: #4CAF50; /* Цвет ссылок */
+    padding: 10px 15px; /* Увеличение области нажатия */
+    border-radius: 5px; /* Закругление углов */
+    display: inline-block; /* Для правильного отображения отступов */
 }
 
 section {
@@ -66,6 +69,30 @@ section.active {
     cursor: pointer; /* Курсор указывает, что элемент можно нажимать */
     font-size: 24px; /* Размер иконки */
     padding: 5px; /* Отступ для уменьшения области */
+    transition: transform 0.3s; /* Плавный переход при наведении */
+}
+
+.theme-toggle:hover {
+    transform: scale(1.1); /* Увеличение при наведении */
+}
+
+.music-controls {
+    position: absolute; /* Абсолютное позиционирование */
+    top: 10px; /* Расположение сверху */
+    right: 10px; /* Расположение справа */
+}
+
+.music-controls button {
+    background: none; /* Убрать фон */
+    border: none; /* Убрать границы */
+    color: white; /* Цвет текста */
+    font-size: 24px; /* Размер шрифта */
+    margin-left: 5px; /* Отступ между кнопками */
+    cursor: pointer; /* Курсор указывает, что элемент можно нажимать */
+}
+
+.music-controls input[type="range"] {
+    margin-left: 10px; /* Отступ между кнопками и ползунком */
 }
 
 /* Адаптивные стили для мобильных устройств */
@@ -86,5 +113,16 @@ section.active {
 
     header {
         padding: 10px; /* Уменьшение отступов в заголовке */
+    }
+
+    .menu-toggle {
+        cursor: pointer;
+        font-size: 24px;
+        display: inline-block; /* Отображается на мобильных устройствах */
+    }
+
+    .music-controls {
+        top: 5px; /* Позиционируем выше на мобильных */
+        right: 5px; /* Позиционируем правее на мобильных */
     }
 }
