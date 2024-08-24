@@ -6,7 +6,6 @@
     <title>MyBio</title>
     <link rel="icon" href="https://sun9-5.userapi.com/impg/mDIvYqFFSqSx_x3Xb8XMsDzoNKtwkDQiBi174w/2RSIgqlcJ9k.jpg?size=1024x576&quality=95&sign=c3fe037fb915c1a64e98315043ef1066&type=album" type="image/png" />
     <link rel="stylesheet" href="style.css" />
-
 </head>
 <body>
     <header>
@@ -15,6 +14,7 @@
     </header>
 
     <nav>
+        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
         <a href="#" onclick="showSection('description')">📌Главная</a>
         <a href="#" onclick="showSection('mybio')">📢Обновление</a>
         <a href="#" onclick="showSection('launge')">Какие языки предпочитаю</a>
@@ -25,11 +25,20 @@
     <section id="description" class="active">
         <h2>Главная Страница</h2>
         <p>Добро пожаловать на мою страничку обо мне, сейчас я расскажу кто я и чем я занимаюсь, меня зовут Артём, мне 16 лет, я занимаюсь программированием 3 года.</p>
-        <p>Чтобы посмотреть обо мне больше, нажимай на соответствующие разделы.</p>
+        <div class="music-controls">
+            <audio id="background-music" loop>
+                <source src="Steve Lacy - Baby you got something in your nose.mp3" type="audio/mpeg">
+                Ваш браузер не поддерживает аудио.
+            </audio>
+            <button id="play-button">▶️</button>
+            <button id="pause-button" style="display:none;">⏸️</button>
+            <input type="range" id="volume-control" min="0" max="1" step="0.1" value="0.5">
+            <label for="volume-control">Громкость</label>
+        </div>
     </section>
 
     <section id="launge">
-        <h2>Языки програмированний</h2>
+        <h2>Языки программирования</h2>
         <div class="progress">
             <strong>PYTHON:</strong>
             <div class="progress-container"><div class="progress-bar" style="width: 100%;"></div></div>
@@ -46,21 +55,17 @@
             <strong>C#:</strong>
             <div class="progress-container"><div class="progress-bar" style="width: 25%;"></div></div>
         </div>
-        <p>Я разработал этот сайт на языках: <strong>HTML</strong> - 72,5%, <strong>CSS</strong> - 27,5%.</p>
     </section>
 
     <section id="mybio">
         <h1>Добавлено/Изменено</h1>
         <p>Смена цвета (белый, черный) - да</p>
-        <p>Регистрация - пока что нет</p>
-        <p>Выдавать доступ по нику, либо по почте - нет</p>
-        <p>Аватарка сайта - да</p>
     </section>
 
     <section id="develops">
         <h1>Что я хочу разработать еще</h1>
         <p>Авторизация, а значит, подучить немного HTML, а также базу данных и API.</p>
-        <p>Сделать мини приложение с помощью которого можно общаться с другими пользователями, добавлять в друзья/слушать музыку, созваниваться</p>
+        <p>Сделать мини приложение с помощью которого можно общаться с другими пользователями.</p>
     </section>
 
     <section id="links">
@@ -70,12 +75,58 @@
         <p>Моя группа ВК: <a href="https://vk.com/ddbdev" style="text-decoration: none; color: inherit;">ВКонтакте</a></p>
         <p>Мой Twitch: <a href="https://www.twitch.tv/kepkaa_aaa" style="text-decoration: none; color: inherit;">Twitch</a></p>
     </section>
+
     <script>
+        const music = document.getElementById('background-music');
+        const playButton = document.getElementById('play-button');
+        const pauseButton = document.getElementById('pause-button');
+        const volumeControl = document.getElementById('volume-control');
+
+        // Восстановление активной секции из localStorage
+        window.onload = function() {
+            const activeSection = localStorage.getItem('activeSection') || 'description';
+            showSection(activeSection);
+        };
+
+        // Функция для переключения секций
         function showSection(sectionId) {
             const sections = document.querySelectorAll("section");
             sections.forEach((section) => section.classList.remove("active"));
             document.getElementById(sectionId).classList.add("active");
+
+            // Сохранение активной секции в localStorage
+            localStorage.setItem('activeSection', sectionId);
+            
+            // Убедитесь, что музыка воспроизводится при показе главной секции
+            if (sectionId === 'description') {
+                if (music.paused) {
+                    music.play();
+                    playButton.style.display = "none";
+                    pauseButton.style.display = "inline-block";
+                }
+            } else {
+                // Музыка продолжает играть, не делая никаких изменений
+            }
         }
+
+        // Остановка музыки при переключении на другой сайт
+        window.addEventListener("blur", function() {
+            if (!music.paused) {
+                music.pause();
+                pauseButton.style.display = "none";
+                playButton.style.display = "inline-block";
+            }
+        });
+
+        // Продолжение музыки при возвращении на сайт
+        window.addEventListener("focus", function() {
+            const activeSection = localStorage.getItem('activeSection');
+            if (activeSection === 'description' && music.paused) {
+                music.play();
+                playButton.style.display = "none";
+                pauseButton.style.display = "inline-block";
+            }
+        });
 
         function toggleTheme() {
             document.body.classList.toggle("light-mode");
@@ -84,6 +135,27 @@
             const themeToggle = document.querySelector(".theme-toggle");
             themeToggle.textContent = document.body.classList.contains("light-mode") ? "🌞" : "🌜";
         }
+
+        function toggleMenu() {
+            const navLinks = document.querySelectorAll('nav a');
+            navLinks.forEach(link => link.classList.toggle('active'));
+        }
+
+        playButton.addEventListener('click', () => {
+            music.play();
+            playButton.style.display = "none";
+            pauseButton.style.display = "inline-block";
+        });
+
+        pauseButton.addEventListener('click', () => {
+            music.pause();
+            pauseButton.style.display = "none";
+            playButton.style.display = "inline-block";
+        });
+
+        volumeControl.addEventListener('input', (event) => {
+            music.volume = event.target.value;
+        });
     </script>
 </body>
 </html>
