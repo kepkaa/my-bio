@@ -24,7 +24,7 @@
 
     <section id="description" class="active">
         <h2>Главная Страница</h2>
-        <p>Добро пожаловать на мою страничку обо мне, сейчас я расскажу кто я и чем я занимаюсь, меня зовут Артём, мне 16 лет, я занимаюсь программированием 3 года.</p>
+        <p>Добро пожаловать на мою страничку обо мне! Меня зовут Артём, мне 16 лет, и я занимаюсь программированием уже 3 года.</p>
         <div class="music-controls">
             <audio id="background-music" loop>
                 <source src="Steve Lacy - Baby you got something in your nose.mp3" type="audio/mpeg">
@@ -32,12 +32,11 @@
             </audio>
             <button id="play-button">▶️</button>
             <button id="pause-button" style="display:none;">⏸️</button>
-            <input type="range" id="volumeSlider" min="0" max="100" value="50" step="1"
-                audioPlayer.volume = volumeSlider.value / 20;>
+            <input type="range" id="volumeSlider" min="0" max="100" value="50" step="1">
         </div>
     </section>
 
-    <section id="launge">
+    <section id="launge" style="display:none;">
         <h2>Языки программирования</h2>
         <div class="progress">
             <strong>PYTHON:</strong>
@@ -58,7 +57,7 @@
         <p>Я разработал этот сайт на языках: <strong>HTML</strong> - 72,5%, <strong>CSS</strong> - 27,5%.</p>
     </section>
 
-    <section id="mybio">
+    <section id="mybio" style="display:none;">
         <h1>Добавлено/Изменено</h1>
         <p>Смена цвета (белый, черный) - да</p>
         <p>Музыка, ползунок смены громкости - да</p>
@@ -66,16 +65,16 @@
         <p>Ссылки где я нахожусь - да</p>
     </section>
 
-    <section id="develops">
+    <section id="develops" style="display:none;">
         <h1>Что я хочу разработать еще</h1>
         <p>Авторизация, а значит, подучить немного HTML, а также базу данных и API.</p>
-        <p>Сделать мини приложение с помощью которого можно общаться с другими пользователями.</p>
+        <p>Сделать мини-приложение, с помощью которого можно общаться с другими пользователями.</p>
     </section>
 
-    <section id="links">
+    <section id="links" style="display:none;">
         <h1>Где я есть</h1>
-        <p>Мой дискорд сервер: <a href="https://discord.gg/ZNZ77P3jUR" style="text-decoration: none; color: inherit;">Дискорд</a></p>
-        <p>Мой дискорд: <strong>off.kepkaa</strong></p>
+        <p>Мой Discord сервер: <a href="https://discord.gg/ZNZ77P3jUR" style="text-decoration: none; color: inherit;">Дискорд</a></p>
+        <p>Мой Discord: <strong>off.kepkaa</strong></p>
         <p>Моя группа ВК: <a href="https://vk.com/ddbdev" style="text-decoration: none; color: inherit;">ВКонтакте</a></p>
         <p>Мой Twitch: <a href="https://www.twitch.tv/kepkaa_aaa" style="text-decoration: none; color: inherit;">Twitch</a></p>
     </section>
@@ -84,32 +83,31 @@
         const music = document.getElementById('background-music');
         const playButton = document.getElementById('play-button');
         const pauseButton = document.getElementById('pause-button');
-        const volumeControl = document.getElementById('volume-control');
+        const volumeControl = document.getElementById('volumeSlider');
 
         // Восстановление активной секции из localStorage
         window.onload = function() {
             const activeSection = localStorage.getItem('activeSection') || 'description';
             showSection(activeSection);
+            music.volume = volumeControl.value / 100; // Установка начального уровня громкости
         };
 
         // Функция для переключения секций
         function showSection(sectionId) {
             const sections = document.querySelectorAll("section");
-            sections.forEach((section) => section.classList.remove("active"));
-            document.getElementById(sectionId).classList.add("active");
+            sections.forEach((section) => section.style.display = 'none'); // Скрыть все секции
+            document.getElementById(sectionId).style.display = 'block'; // Показать текущую секцию
 
             // Сохранение активной секции в localStorage
             localStorage.setItem('activeSection', sectionId);
             
-            // Убедитесь, что музыка воспроизводится при показе главной секции
+            // Управление воспроизведением музыки
             if (sectionId === 'description') {
                 if (music.paused) {
                     music.play();
                     playButton.style.display = "none";
                     pauseButton.style.display = "inline-block";
                 }
-            } else {
-                // Музыка продолжает играть, не делая никаких изменений
             }
         }
 
@@ -158,7 +156,7 @@
         });
 
         volumeControl.addEventListener('input', (event) => {
-            music.volume = event.target.value;
+            music.volume = event.target.value / 100; // Установка громкости в диапазоне от 0 до 1
         });
     </script>
 </body>
