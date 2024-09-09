@@ -3,13 +3,17 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>mybio by kepkaa</title>
+    <title id="pageTitle">kepkaa</title>
     <link rel="icon" href="https://sun9-5.userapi.com/impg/mDIvYqFFSqSx_x3Xb8XMsDzoNKtwkDQiBi174w/2RSIgqlcJ9k.jpg?size=1024x576&quality=95&sign=c3fe037fb915c1a64e98315043ef1066&type=album" type="image/png" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+    <div class="overlay" id="kepkaaOverlay">
+        <h1 id="kepkaaText">kepkaa</h1>
+    </div>
+
     <header>
-        <h1>bio -> off.kepkaa</h1>
+        <h1 id="headerTitle">kepkaa</h1>
         <div class="theme-toggle" onclick="toggleTheme()">🌜</div>
     </header>
 
@@ -84,9 +88,37 @@
         const playButton = document.getElementById('play-button');
         const pauseButton = document.getElementById('pause-button');
         const volumeControl = document.getElementById('volumeSlider');
+        const kepkaaText = document.getElementById('kepkaaText');
+        const headerTitle = document.getElementById('headerTitle');
+        const pageTitle = document.getElementById('pageTitle');
+
+        let index = 0;
+        const text1 = 'kepkaa';
+        const text2 = 'aapkek';
+        let isFirstText = true;
+
+        function updateText(text) {
+            kepkaaText.textContent = text;
+            headerTitle.textContent = text;
+            pageTitle.textContent = text;
+        }
+
+        function showText() {
+            const textToShow = isFirstText ? text1 : text2;
+            if (index < textToShow.length) {
+                updateText(textToShow.substring(0, index + 1));
+                index++;
+                setTimeout(showText, 400);
+            } else {
+                index = 0;
+                isFirstText = !isFirstText;
+                setTimeout(showText, 1000);
+            }
+        }
 
         // Восстановление активной секции из localStorage
         window.onload = function() {
+            showText();
             const activeSection = localStorage.getItem('activeSection') || 'description';
             showSection(activeSection);
             music.volume = volumeControl.value / 100; // Установка начального уровня громкости
@@ -95,8 +127,8 @@
         // Функция для переключения секций
         function showSection(sectionId) {
             const sections = document.querySelectorAll("section");
-            sections.forEach((section) => section.style.display = 'none'); // Скрыть все секции
-            document.getElementById(sectionId).style.display = 'block'; // Показать текущую секцию
+            sections.forEach((section) => section.style.display = 'none');
+            document.getElementById(sectionId).style.display = 'block';
 
             // Сохранение активной секции в localStorage
             localStorage.setItem('activeSection', sectionId);
@@ -156,7 +188,7 @@
         });
 
         volumeControl.addEventListener('input', (event) => {
-            music.volume = event.target.value / 100; // Установка громкости в диапазоне от 0 до 1
+            music.volume = event.target.value / 100;
         });
     </script>
 </body>
